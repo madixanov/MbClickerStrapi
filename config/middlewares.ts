@@ -7,7 +7,7 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'frame-ancestors': ["'self'", 'https://t.me'], // разрешаем Telegram webview
+          'frame-ancestors': ["'self'", 'https://t.me'],
         },
       },
     },
@@ -18,8 +18,8 @@ export default [
       origin: [
         'https://t.me',
         'https://web.telegram.org',
-        'https://mbclicker.netlify.app/', // если у тебя фронт хостится отдельно
-        'http://localhost:3000', // для разработки
+        'https://mbclicker.netlify.app/',
+        'https://mbclickerstrapi.onrender.com/',
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
