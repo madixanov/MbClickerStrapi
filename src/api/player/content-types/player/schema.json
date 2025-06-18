@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "players",
+  "info": {
+    "singularName": "player",
+    "pluralName": "players",
+    "displayName": "player"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "telegram_id": {
+      "type": "integer",
+      "unique": true
+    },
+    "username": {
+      "type": "string"
+    },
+    "photo_url": {
+      "type": "string"
+    },
+    "clicks": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    }
+  }
+}
