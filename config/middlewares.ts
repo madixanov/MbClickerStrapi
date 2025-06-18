@@ -7,11 +7,7 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:', 'http:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'cdn.jsdelivr.net', 'strapi.io', 't.me'],
-          'media-src': ["'self'", 'data:', 'blob:', 'cdn.jsdelivr.net', 'strapi.io', 't.me'],
-          'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'],
-          'frame-src': ["'self'", 't.me', 'telegram.org'],
+          'frame-ancestors': ["'self'", 'https://t.me'], // разрешаем Telegram webview
         },
       },
     },
@@ -20,23 +16,13 @@ export default [
     name: 'strapi::cors',
     config: {
       origin: [
-        'https://mbclicker.netlify.app',
+        'https://t.me',
         'https://web.telegram.org',
-        'https://telegram.org',
-        /\.telegram\.org$/,
-        /\.t\.me$/,
+        'https://mbclicker.netlify.app/', // если у тебя фронт хостится отдельно
+        'http://localhost:3000', // для разработки
       ],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS'],
-      headers: [
-        'Content-Type',
-        'Authorization',
-        'Origin',
-        'Accept',
-        'X-Requested-With',
-        'X-Telegram-Init-Data',
-      ],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
-      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',
