@@ -5,7 +5,7 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['https://mbclicker.netlify.app/'], // ← замените на свой Netlify-URL
+      origin: ['https://mbclicker.netlify.app/'],
       methods: ['GET', 'POST', 'PUT'],
       headers: '*',
       credentials: true,
