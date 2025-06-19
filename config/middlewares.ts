@@ -18,7 +18,7 @@ export default [
       origin: [
         'https://t.me',
         'https://web.telegram.org',
-        'https://mbclicker.netlify.app/',
+        'https://mbclicker.netlify.app',
         'https://mbclickerstrapi.onrender.com/',
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
