@@ -21,15 +21,19 @@
         "photo_url": {
             "type": "string"
         },
-        "clicks": {
-            "type": "biginteger",
-            "default": "0"
-        },
         "first_name": {
             "type": "string"
         },
         "last_name": {
             "type": "string"
+        },
+        "clicks": {
+            "type": "biginteger",
+            "default": "0"
+        },
+        "level": {
+            "type": "integer",
+            "default": 1
         }
     }
 }
