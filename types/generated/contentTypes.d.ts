@@ -398,6 +398,7 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     photo_url: Schema.Attribute.String;
+    progress_tokens: Schema.Attribute.BigInteger;
     publishedAt: Schema.Attribute.DateTime;
     telegram_id: Schema.Attribute.Integer & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
