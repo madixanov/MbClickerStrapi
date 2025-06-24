@@ -397,7 +397,7 @@ export interface ApiBonusBonus extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.DefaultTo<'Text'>;
-    players: Schema.Attribute.Relation<'oneToMany', 'api::player.player'>;
+    player: Schema.Attribute.Relation<'manyToOne', 'api::player.player'>;
     Prize: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
@@ -419,7 +419,7 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    bonus: Schema.Attribute.Relation<'manyToOne', 'api::bonus.bonus'>;
+    bonuses: Schema.Attribute.Relation<'oneToMany', 'api::bonus.bonus'>;
     clicks: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
