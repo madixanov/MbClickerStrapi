@@ -28,6 +28,11 @@
       "required": true,
       "default": false
     },
+    "isTemplate": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
     "player": {
       "type": "relation",
       "relation": "manyToOne",
