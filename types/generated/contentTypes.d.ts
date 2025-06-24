@@ -373,6 +373,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBonusBonus extends Struct.CollectionTypeSchema {
+  collectionName: 'bonuses';
+  info: {
+    displayName: 'bonus';
+    pluralName: 'bonuses';
+    singularName: 'bonus';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Completed: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::bonus.bonus'> &
+      Schema.Attribute.Private;
+    Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.DefaultTo<'Text'>;
+    players: Schema.Attribute.Relation<'oneToMany', 'api::player.player'>;
+    Prize: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
   collectionName: 'players';
   info: {
@@ -384,6 +419,7 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bonus: Schema.Attribute.Relation<'manyToOne', 'api::bonus.bonus'>;
     clicks: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -405,6 +441,30 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     username: Schema.Attribute.String;
+  };
+}
+
+export interface ApiTaskTask extends Struct.CollectionTypeSchema {
+  collectionName: 'tasks';
+  info: {
+    displayName: 'task';
+    pluralName: 'tasks';
+    singularName: 'task';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::task.task'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -917,7 +977,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::bonus.bonus': ApiBonusBonus;
       'api::player.player': ApiPlayerPlayer;
+      'api::task.task': ApiTaskTask;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
