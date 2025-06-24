@@ -38,11 +38,11 @@
         "progress_tokens": {
             "type": "biginteger"
         },
-        "bonus": {
+        "bonuses": {
             "type": "relation",
-            "relation": "manyToOne",
+            "relation": "oneToMany",
             "target": "api::bonus.bonus",
-            "inversedBy": "players"
+            "mappedBy": "player"
         }
     }
 }

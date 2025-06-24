@@ -28,11 +28,11 @@
       "required": true,
       "default": false
     },
-    "players": {
+    "player": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::player.player",
-      "mappedBy": "bonus"
+      "inversedBy": "bonuses"
     }
   }
 }
