@@ -38,9 +38,9 @@
       "required": true,
       "default": true
     },
-    "player": {
+    "completedBy": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::player.player",
       "inversedBy": "tasks"
     }

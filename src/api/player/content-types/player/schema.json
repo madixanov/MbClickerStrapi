@@ -46,9 +46,9 @@
     },
     "tasks": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::task.task",
-      "mappedBy": "player"
+      "mappedBy": "completedBy"
     }
   }
 }
