@@ -23,6 +23,11 @@
             "required": true,
             "default": 0
         },
+        "Goal": {
+            "type": "integer",
+            "required": false,
+            "default": 0
+        },
         "Completed": {
             "type": "boolean",
             "required": true,
