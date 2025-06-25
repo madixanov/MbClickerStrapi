@@ -43,6 +43,12 @@
             "relation": "oneToMany",
             "target": "api::bonus.bonus",
             "mappedBy": "player"
+        },
+        "tasks": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::task.task",
+            "mappedBy": "player"
         }
     }
 }
