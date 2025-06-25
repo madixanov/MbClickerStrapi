@@ -10,5 +10,34 @@
         "draftAndPublish": true
     },
     "pluginOptions": {},
-    "attributes": {}
+    "attributes": {
+        "Name": {
+            "type": "string",
+            "default": "Text",
+            "required": true,
+            "unique": true,
+            "regex": "^[A-Za-zА-Яа-яЁё\\s]+$"
+        },
+        "Prize": {
+            "type": "integer",
+            "required": true,
+            "default": 0
+        },
+        "Completed": {
+            "type": "boolean",
+            "required": true,
+            "default": false
+        },
+        "isTemplate": {
+            "type": "boolean",
+            "required": true,
+            "default": true
+        },
+        "player": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::player.player",
+            "inversedBy": "tasks"
+        }
+    }
 }
