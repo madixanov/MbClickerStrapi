@@ -16,7 +16,7 @@
             "default": "Text",
             "required": true,
             "unique": true,
-            "regex": "^[A-Za-zА-Яа-яЁё\\s]+$"
+            "regex": "^[A-Za-zА-Яа-яЁё0-9\\s]+$"
         },
         "Prize": {
             "type": "integer",
