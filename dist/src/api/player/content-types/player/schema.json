@@ -38,17 +38,29 @@
         "progress_tokens": {
             "type": "biginteger"
         },
-        "bonuses": {
+        "invited_by": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::player.player",
+            "inversedBy": "invited_friends"
+        },
+        "invited_friends": {
             "type": "relation",
             "relation": "oneToMany",
-            "target": "api::bonus.bonus",
-            "mappedBy": "player"
+            "target": "api::player.player",
+            "mappedBy": "invited_by"
         },
-        "tasks": {
+        "completed_bonuses": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::bonus.bonus",
+            "mappedBy": "completedBy"
+        },
+        "completed_tasks": {
             "type": "relation",
             "relation": "manyToMany",
             "target": "api::task.task",
-            "mappedBy": "completedBy"
+            "inversedBy": "completedBy"
         }
     }
 }

@@ -387,6 +387,7 @@ export interface ApiBonusBonus extends Struct.CollectionTypeSchema {
     Completed: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
+    completedBy: Schema.Attribute.Relation<'manyToMany', 'api::player.player'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -400,7 +401,6 @@ export interface ApiBonusBonus extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.DefaultTo<'Text'>;
-    player: Schema.Attribute.Relation<'manyToOne', 'api::player.player'>;
     Prize: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
@@ -422,12 +422,21 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    bonuses: Schema.Attribute.Relation<'oneToMany', 'api::bonus.bonus'>;
     clicks: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
+    completed_bonuses: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::bonus.bonus'
+    >;
+    completed_tasks: Schema.Attribute.Relation<'manyToMany', 'api::task.task'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     first_name: Schema.Attribute.String;
+    invited_by: Schema.Attribute.Relation<'manyToOne', 'api::player.player'>;
+    invited_friends: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::player.player'
+    >;
     last_name: Schema.Attribute.String;
     level: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -439,7 +448,6 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     photo_url: Schema.Attribute.String;
     progress_tokens: Schema.Attribute.BigInteger;
     publishedAt: Schema.Attribute.DateTime;
-    tasks: Schema.Attribute.Relation<'manyToMany', 'api::task.task'>;
     telegram_id: Schema.Attribute.Integer & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
