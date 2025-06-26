@@ -42,7 +42,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::player.player",
-      "inversedBy": "tasks"
+      "mappedBy": "completed_tasks"
     }
   }
 }
