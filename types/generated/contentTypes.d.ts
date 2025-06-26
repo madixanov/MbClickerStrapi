@@ -432,7 +432,7 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     first_name: Schema.Attribute.String;
-    invite_code: Schema.Attribute.UID;
+    invite_code: Schema.Attribute.String & Schema.Attribute.Unique;
     invited_by: Schema.Attribute.Relation<'manyToOne', 'api::player.player'>;
     invited_friends: Schema.Attribute.Relation<
       'oneToMany',

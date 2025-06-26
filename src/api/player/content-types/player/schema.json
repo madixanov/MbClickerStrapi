@@ -39,7 +39,8 @@
       "type": "biginteger"
     },
     "invite_code": {
-      "type": "uid"
+      "type": "string",
+      "unique": true
     },
     "invited_by": {
       "type": "relation",
