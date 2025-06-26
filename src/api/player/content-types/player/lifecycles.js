@@ -5,8 +5,12 @@ export default {
   async beforeCreate(event) {
     const { params } = event;
 
+    console.log("🔥 beforeCreate hook запускается");
+
     if (!params.data.invite_code) {
-      params.data.invite_code = nanoid(); // Уникальный код
+      const code = nanoid();
+      console.log("🎲 Генерируем invite_code:", code);
+      params.data.invite_code = code;
     }
   },
 };
