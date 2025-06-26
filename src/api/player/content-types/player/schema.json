@@ -38,6 +38,9 @@
     "progress_tokens": {
       "type": "biginteger"
     },
+    "invite_code": {
+      "type": "uid"
+    },
     "invited_by": {
       "type": "relation",
       "relation": "manyToOne",
