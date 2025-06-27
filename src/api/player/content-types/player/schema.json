@@ -42,6 +42,10 @@
       "type": "boolean",
       "default": false
     },
+    "referal_bonus_given": {
+      "type": "boolean",
+      "default": false
+    },
     "invite_code": {
       "type": "string",
       "unique": true
