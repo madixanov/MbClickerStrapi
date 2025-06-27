@@ -422,6 +422,7 @@ export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bonus_given: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     clicks: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
     completed_bonuses: Schema.Attribute.Relation<
       'manyToMany',
