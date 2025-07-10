@@ -43,6 +43,10 @@
       "relation": "manyToMany",
       "target": "api::player.player",
       "mappedBy": "completed_tasks"
+    },
+    "taskLink": {
+      "type": "string",
+      "required": false
     }
   }
 }
