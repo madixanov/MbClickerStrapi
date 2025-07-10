@@ -38,9 +38,6 @@
     "progress_tokens": {
       "type": "biginteger"
     },
-    "invited_friends_id": {
-      "type": "json"
-    },
     "referal_bonus_given": {
       "type": "boolean",
       "default": false
@@ -72,6 +69,18 @@
       "relation": "manyToMany",
       "target": "api::task.task",
       "inversedBy": "completedBy"
+    },
+    "subsciptionActive": {
+      "type": "boolean",
+      "default": false
+    },
+    "subscriptionEndDate": {
+      "type": "date",
+      "default": null
+    },
+    "subscriptionMonths": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
