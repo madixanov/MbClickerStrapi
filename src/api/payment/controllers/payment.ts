@@ -2,18 +2,22 @@ import { factories } from '@strapi/strapi';
 import { Context } from 'koa';
 import { YooCheckout } from '@a2seven/yoo-checkout';
 
+// Инициализация YooKassa
 const checkout = new YooCheckout({
   shopId: process.env.YOOKASSA_SHOP_ID!,
   secretKey: process.env.YOOKASSA_SECRET_KEY!,
 });
 
+// Типизация подписок
 const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string; months: number }> = {
   1: { value: '149.00', name: 'Мини-подписка', months: 1 },
   2: { value: '359.00', name: 'Стандарт-подписка', months: 3 },
   3: { value: '759.00', name: 'Премиум-подписка', months: 6 },
 };
 
+// Экспорт контроллера
 export default factories.createCoreController('api::payment.payment' as any, ({ strapi }) => ({
+  // Переопределение метода create
   async create(ctx: Context) {
     try {
       const { type, telegramId } = ctx.request.body;
@@ -45,7 +49,6 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
         },
       });
 
-      console.log('YooKassa payment response:', payment);
       const createdPayment = await strapi.db.query('api::payment.payment').create({
         data: {
           telegram_id: Number(telegramId),
@@ -57,7 +60,6 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
           confirmationUrl: payment.confirmation.confirmation_url,
         },
       });
-      console.log('Created payment:', createdPayment);
 
       ctx.send({ url: payment.confirmation.confirmation_url });
     } catch (error) {
@@ -66,3 +68,4 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
     }
   },
 }));
+// Этот код создает контроллер для управления платежами в Strapi, используя YooKassa для обработки платежей.
