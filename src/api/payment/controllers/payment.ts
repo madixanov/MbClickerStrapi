@@ -13,7 +13,7 @@ const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string; months:
   3: { value: '759.00', name: 'Премиум-подписка', months: 6 },
 };
 
-export default factories.createCoreController('api::payment.payment', ({ strapi }) => ({
+export default factories.createCoreController('api::payment.payment' as any, ({ strapi }) => ({
   async create(ctx: Context) {
     try {
       const { type, telegramId } = ctx.request.body;
