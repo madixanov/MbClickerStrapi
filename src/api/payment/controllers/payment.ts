@@ -45,7 +45,8 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
         },
       });
 
-      await strapi.db.query('api::payment.payment').create({
+      console.log('YooKassa payment response:', payment);
+      const createdPayment = await strapi.db.query('api::payment.payment').create({
         data: {
           telegram_id: Number(telegramId),
           type,
@@ -56,6 +57,7 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
           confirmationUrl: payment.confirmation.confirmation_url,
         },
       });
+      console.log('Created payment:', createdPayment);
 
       ctx.send({ url: payment.confirmation.confirmation_url });
     } catch (error) {
