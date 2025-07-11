@@ -1,0 +1,40 @@
+{
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "Payment",
+    "description": "Платежи от Telegram-бота через ЮKassa"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "telegramId": {
+      "type": "integer",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["1", "2", "3"],
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "pending"
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "paymentId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "confirmationUrl": {
+      "type": "text"
+    }
+  }
+}

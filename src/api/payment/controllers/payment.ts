@@ -1,4 +1,3 @@
-import { Strapi } from '@strapi/strapi';
 import { Context } from 'koa';
 import { YooCheckout } from '@a2seven/yoo-checkout';
 
@@ -8,9 +7,9 @@ const checkout = new YooCheckout({
 });
 
 const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string }> = {
-  1: { value: '299.00', name: 'Мини-подписка' },
-  2: { value: '549.00', name: 'Стандарт-подписка' },
-  3: { value: '739.00', name: 'Премиум-подписка' },
+  1: { value: '149.00', name: 'Мини-подписка' },
+  2: { value: '359.00', name: 'Стандарт-подписка' },
+  3: { value: '759.00', name: 'Премиум-подписка' },
 };
 
 export default {
