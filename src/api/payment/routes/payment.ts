@@ -8,5 +8,13 @@ export default {
         auth: false,
       },
     },
+    {
+      method: 'POST',
+      path: '/payment/webhook',
+      handler: 'payment.webhook',
+      config: {
+        auth: false,
+      },
+    }
   ],
 };

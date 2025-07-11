@@ -6,19 +6,23 @@ const checkout = new YooCheckout({
   secretKey: process.env.YOOKASSA_SECRET_KEY!,
 });
 
-const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string }> = {
-  1: { value: '149.00', name: 'Мини-подписка' },
-  2: { value: '359.00', name: 'Стандарт-подписка' },
-  3: { value: '759.00', name: 'Премиум-подписка' },
+const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string; months: number }> = {
+  1: { value: '149.00', name: 'Мини-подписка', months: 1 },
+  2: { value: '359.00', name: 'Стандарт-подписка', months: 3 },
+  3: { value: '759.00', name: 'Премиум-подписка', months: 6 },
 };
 
 export default {
   async create(ctx: Context) {
     try {
-      const { type } = ctx.request.body;
+      const { type, telegramId } = ctx.request.body;
 
       if (![1, 2, 3].includes(type)) {
         return ctx.badRequest('Неверный тип подписки');
+      }
+
+      if (!telegramId) {
+        return ctx.badRequest('Не передан telegramId');
       }
 
       const sub = SUBSCRIPTION_PRICES[type];
@@ -30,10 +34,26 @@ export default {
         },
         confirmation: {
           type: 'redirect',
-          return_url: 'https://t.me/your_bot_username',
+          return_url: 'https://t.me/bengal_click_bot', // укажи username бота
         },
         capture: true,
         description: `${sub.name} в Telegram-боте`,
+        metadata: {
+          telegramId: String(telegramId),
+          type: String(type),
+        },
+      });
+
+      await strapi.entityService.create('api::payment.payment' as any, {
+        data: {
+          telegram_id: Number(telegramId),
+          type,
+          amount: sub.value,
+          months: sub.months,
+          status: 'pending',
+          paymentId: payment.id,
+          confirmationUrl: payment.confirmation.confirmation_url,
+        },
       });
 
       ctx.send({ url: payment.confirmation.confirmation_url });
