@@ -7,6 +7,30 @@ export default {
       config: {
         auth: false,
       },
-    }
+    },
+    {
+      method: 'GET',
+      path: '/payments',
+      handler: 'payment.find',
+      config: {
+        auth: false, // или true, если хочешь защитить
+      },
+    },
+    {
+      method: 'GET',
+      path: '/payments/:id',
+      handler: 'payment.findOne',
+      config: {
+        auth: false,
+      },
+    },
+    {
+      method: 'PUT',
+      path: '/payments/:id',
+      handler: 'payment.update',
+      config: {
+        auth: false,
+      },
+    },
   ],
 };
