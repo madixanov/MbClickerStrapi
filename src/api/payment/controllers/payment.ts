@@ -1,3 +1,4 @@
+import { factories } from '@strapi/strapi';
 import { Context } from 'koa';
 import { YooCheckout } from '@a2seven/yoo-checkout';
 
@@ -12,7 +13,7 @@ const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string; months:
   3: { value: '759.00', name: 'Премиум-подписка', months: 6 },
 };
 
-export default {
+export default factories.createCoreController('api::payment.payment', ({ strapi }) => ({
   async create(ctx: Context) {
     try {
       const { type, telegramId } = ctx.request.body;
@@ -34,7 +35,7 @@ export default {
         },
         confirmation: {
           type: 'redirect',
-          return_url: 'https://t.me/bengal_click_bot', // укажи username бота
+          return_url: 'https://t.me/bengal_click_bot',
         },
         capture: true,
         description: `${sub.name} в Telegram-боте`,
@@ -45,16 +46,16 @@ export default {
       });
 
       await strapi.db.query('api::payment.payment').create({
-          data: {
-            telegram_id: Number(telegramId),
-            type,
-            amount: sub.value,
-            months: sub.months,
-            status: 'pending',
-            paymentId: payment.id,
-            confirmationUrl: payment.confirmation.confirmation_url,
-          },
-        });
+        data: {
+          telegram_id: Number(telegramId),
+          type,
+          amount: sub.value,
+          months: sub.months,
+          status: 'pending',
+          paymentId: payment.id,
+          confirmationUrl: payment.confirmation.confirmation_url,
+        },
+      });
 
       ctx.send({ url: payment.confirmation.confirmation_url });
     } catch (error) {
@@ -62,4 +63,4 @@ export default {
       ctx.throw(500, 'Ошибка при создании платежа');
     }
   },
-};
+}));
