@@ -13,7 +13,7 @@ const SUBSCRIPTION_PRICES: Record<number, { value: string; name: string; months:
   3: { value: '759.00', name: 'Премиум-подписка', months: 6 },
 };
 
-export default factories.createCoreController('api::payment.payment', ({ strapi }) => ({
+export default factories.createCoreController('api::payment.payment' as any, ({ strapi }) => ({
   // 🟢 Кастомный метод создания платежа
   async create(ctx: Context) {
     try {
@@ -73,7 +73,7 @@ export default factories.createCoreController('api::payment.payment', ({ strapi 
   // ✅ Базовый метод find (переопределён для явной типизации, но можно не писать)
   async find(ctx: Context) {
     const { query } = ctx;
-    const entries = await strapi.entityService.findMany('api::payment.payment', query);
+    const entries = await strapi.entityService.findMany('api::payment.payment' as any, query);
     const sanitized = await this.sanitizeOutput(entries, ctx);
     return this.transformResponse(sanitized);
   },
