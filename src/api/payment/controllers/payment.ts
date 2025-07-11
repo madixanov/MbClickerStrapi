@@ -77,8 +77,12 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
     const sanitized = await this.sanitizeOutput(entries, ctx);
     return this.transformResponse(sanitized);
   },
-  
+
   async update(ctx: Context) {
     return await super.update(ctx);
   },
+
+  async findOne(ctx: Context) {
+    return await super.findOne(ctx);
+  }
 }));
