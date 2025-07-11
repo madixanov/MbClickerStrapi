@@ -27,9 +27,10 @@
       "required": true
     },
     "status": {
-      "type": "string",
-      "required": true,
-      "default": "pending"
+      "type": "enumeration",
+      "enum": ["pending", "succeeded", "failed"],
+      "default": "pending",
+      "required": true
     },
     "paymentId": {
       "type": "string",
