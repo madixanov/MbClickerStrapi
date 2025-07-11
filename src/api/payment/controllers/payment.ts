@@ -44,17 +44,17 @@ export default {
         },
       });
 
-      await strapi.entityService.create('api::payment.payment' as any, {
-        data: {
-          telegram_id: Number(telegramId),
-          type,
-          amount: sub.value,
-          months: sub.months,
-          status: 'pending',
-          paymentId: payment.id,
-          confirmationUrl: payment.confirmation.confirmation_url,
-        },
-      });
+      await strapi.db.query('api::payment.payment').create({
+          data: {
+            telegram_id: Number(telegramId),
+            type,
+            amount: sub.value,
+            months: sub.months,
+            status: 'pending',
+            paymentId: payment.id,
+            confirmationUrl: payment.confirmation.confirmation_url,
+          },
+        });
 
       ctx.send({ url: payment.confirmation.confirmation_url });
     } catch (error) {
