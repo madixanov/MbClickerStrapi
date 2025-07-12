@@ -77,19 +77,22 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
     }
   },
 
-  // ✅ Базовый метод find (переопределён для явной типизации, но можно не писать)
   async find(ctx: Context) {
-    const { query } = ctx;
-    const entries = await strapi.entityService.findMany('api::payment.payment' as any, query);
-    const sanitized = await this.sanitizeOutput(entries, ctx);
-    return this.transformResponse(sanitized);
-  },
-
+  const { query } = ctx;
+  const entries = await strapi.entityService.findMany('api::payment.payment' as any, query);
+  const sanitized = await Promise.all(entries.map(entry => this.sanitizeOutput(entry, ctx)));
+  return this.transformResponse(sanitized);
+}
+,
   async update(ctx: Context) {
     return await super.update(ctx);
   },
 
   async findOne(ctx: Context) {
-    return await super.findOne(ctx);
-  }
+  const { id } = ctx.params;
+
+  const entry = await strapi.entityService.findOne('api::payment.payment' as any, id, ctx.query);
+  const sanitized = await this.sanitizeOutput(entry, ctx);
+  return this.transformResponse(sanitized);
+}
 }));
