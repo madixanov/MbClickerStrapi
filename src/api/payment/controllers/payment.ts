@@ -84,15 +84,39 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
   return this.transformResponse(sanitized);
 }
 ,
-  async update(ctx: Context) {
-    return await super.update(ctx);
-  },
-
-  async findOne(ctx: Context) {
+  async update(ctx) {
   const { id } = ctx.params;
 
-  const entry = await strapi.entityService.findOne('api::payment.payment' as any, id, ctx.query);
-  const sanitized = await this.sanitizeOutput(entry, ctx);
-  return this.transformResponse(sanitized);
-}
+  const existing = await strapi.db.query('api::payment.payment').findOne({
+    where: { documentId: id },
+  });
+
+  if (!existing) {
+    return ctx.notFound('Платёж не найден');
+  }
+
+  const updated = await strapi.db.query('api::payment.payment').update({
+        where: { documentId: id },
+        data: ctx.request.body.data,
+    });
+
+        const sanitized = await this.sanitizeOutput(updated, ctx);
+        return this.transformResponse(sanitized);
+    },
+
+  async findOne(ctx) {
+    const { id } = ctx.params;
+
+    const entity = await strapi.db.query('api::payment.payment').findOne({
+      where: { documentId: id },
+      populate: '*',
+    });
+
+    if (!entity) {
+      return ctx.notFound('Платёж не найден');
+    }
+
+    const sanitized = await this.sanitizeOutput(entity, ctx);
+    return this.transformResponse(sanitized);
+  },
 }));
