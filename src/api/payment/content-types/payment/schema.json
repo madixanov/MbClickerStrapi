@@ -26,7 +26,7 @@
       "type": "integer",
       "required": true
     },
-    "status": {
+    "payment_status": {
       "type": "enumeration",
       "enum": ["pending", "succeeded", "failed"],
       "default": "pending",
@@ -40,6 +40,12 @@
     "confirmationUrl": {
       "type": "string",
       "required": true
+    },
+    "player": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::player.player",
+      "inversedBy": "payments"
     }
   }
 }

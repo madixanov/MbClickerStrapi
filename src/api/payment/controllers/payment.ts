@@ -57,7 +57,7 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
           type,
           amount: sub.value,
           months: sub.months,
-          status: 'pending',
+          payment_status: 'pending',
           paymentId: payment.id,
           confirmationUrl: payment.confirmation.confirmation_url,
         },

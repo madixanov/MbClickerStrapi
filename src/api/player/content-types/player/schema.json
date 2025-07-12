@@ -81,6 +81,12 @@
     "subscriptionMonths": {
       "type": "integer",
       "default": 0
-    }
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "mappedBy": "player"
+    } 
   }
 }
