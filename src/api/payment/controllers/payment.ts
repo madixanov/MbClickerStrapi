@@ -60,6 +60,9 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
           payment_status: 'pending',
           paymentId: payment.id,
           confirmationUrl: payment.confirmation.confirmation_url,
+        player: {
+                connect: [telegramId],
+            },
         },
       });
 
