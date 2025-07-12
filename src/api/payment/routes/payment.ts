@@ -18,16 +18,16 @@ export default {
     },
     {
       method: 'GET',
-      path: '/payments/:id',
-      handler: 'payment.findOne',
+      path: '/payments/:documentId',
+      handler: 'payment.findOneByDocumentId',
       config: {
         auth: false,
       },
     },
     {
       method: 'PUT',
-      path: '/payments/:id',
-      handler: 'payment.update',
+      path: '/payments/:documentId',
+      handler: 'payment.updateByDocumentId',
       config: {
         auth: false,
       },
