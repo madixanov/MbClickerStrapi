@@ -32,5 +32,13 @@ export default {
         auth: false,
       },
     },
+    {
+      method: 'DELETE',
+      path: '/payments/:id',
+      handler: 'payment.delete',
+      config: {
+        auth: false,
+      },
+    },
   ],
 };
