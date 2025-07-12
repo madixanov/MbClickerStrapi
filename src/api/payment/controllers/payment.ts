@@ -1,6 +1,7 @@
 import { factories } from '@strapi/strapi';
 import { Context } from 'koa';
 import { YooCheckout } from '@a2seven/yoo-checkout';
+import { connect } from 'http2';
 
 const checkout = new YooCheckout({
   shopId: process.env.YOOKASSA_SHOP_ID!,
@@ -31,6 +32,11 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
       }
 
       const sub = SUBSCRIPTION_PRICES[type];
+      const player = await strapi.db.query('api::player.player').findOne({
+            where: {
+                telegram_id: telegramId,
+            },
+            });
 
       // 🧾 Создаём платёж в YooKassa
       const payment = await checkout.createPayment({
@@ -60,9 +66,9 @@ export default factories.createCoreController('api::payment.payment' as any, ({ 
           payment_status: 'pending',
           paymentId: payment.id,
           confirmationUrl: payment.confirmation.confirmation_url,
-        player: {
-                connect: [telegramId],
-            },
+          player: {
+            connect: [player.documentId],
+          }
         },
       });
 
