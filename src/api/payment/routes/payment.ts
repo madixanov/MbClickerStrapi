@@ -19,7 +19,7 @@ export default {
     {
       method: 'GET',
       path: '/payments/:documentId',
-      handler: 'payment.findOneByDocumentId',
+      handler: 'payment.findOne',
       config: {
         auth: false,
       },
@@ -27,7 +27,7 @@ export default {
     {
       method: 'PUT',
       path: '/payments/:documentId',
-      handler: 'payment.updateByDocumentId',
+      handler: 'payment.update',
       config: {
         auth: false,
       },
